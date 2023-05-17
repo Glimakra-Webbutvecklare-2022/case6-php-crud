@@ -2,7 +2,7 @@
 
 I det här caset ska du skapa en variant av en så kallad bokrecension applikation: **en lista över lästa böcker**.
 
-Applikationen ska hantera en lista av böcker med recensioner. Ni ska använda PHP, MySQL, CSS, JavaScript samt HTML.
+Applikationen ska hantera en lista av böcker med recensioner. Ni ska använda PHP, MySQL, CSS, HTML.
 
 Vi vill att du strävar efter följande namngivningsprinciper:
 - använd latinska tecken för variabelnamn och funktioner
@@ -12,7 +12,20 @@ Vi vill att du strävar efter följande namngivningsprinciper:
 - skriv kod med indrag (indentation)
 
 ### Starta ditt arbete
-Skapa ett privat repo på GitHub och koppla det till din lokala utvecklingsmiljö (Visual Studio Code). **TIPS** Använd Anders docker projekt som en grund för caset (Ta bort learn mappen).  
+Skapa ett privat repo på GitHub och koppla det till din lokala utvecklingsmiljö (Visual Studio Code). 
+
+---
+
+**TIPS** 
+
+Använd Anders docker projekt som en grund för caset (Ta bort learn mappen).
+
+eller
+
+Använd en mall som finns för caset - https://github.com/Glimakra-Webbutvecklare-2022/Template-Case-PHP
+
+---
+
 Under projektet - senast 17 Maj bjuder du in dina lärare. Se Settings -> Manage access -> Add people
 
 Lägg till
@@ -30,14 +43,17 @@ När applikationen ska startar ska det finnas en setup SQL query som sätter upp
 Något i stil med:
 
 ```sql
-CREATE TABLE BookReview IF NOT EXISTS ...
+CREATE TABLE `user` IF NOT EXISTS ...
 ```
 
 ### Databas krav
+
 Det ska finnas följande tabeller:
 
+### Alt 1
+
 `BookReview` tabell med minst föjande kolumner:
-- id (INT, unique)
+- id (INT, AUTO_INCREMENT)
 - titel (text)
 - författare (text)
 - yearPublished (INT)
@@ -49,6 +65,25 @@ Det ska finnas följande tabeller:
 - id (INT, unique)
 - username (TEXT, unique)
 - password (TEXT, **hashed**)
+
+#### Alt 2
+
+I stil med sista föreläsningen (Anders)
+
+tabell `user`, med föjande kolumner:
+- user_id (INT, AUTO_INCREMENT)
+- username (VARCHAR 255 tecken)
+- password (VARCHAR 255 tecken, **hashed**)
+
+
+tabell `book`, med föjande kolumner:
+- book_id (INT, AUTO_INCREMENT)
+- title (VARCHAR 255 tecken)
+- author (VARCHAR 255 tecken)
+- year_published (YEAR)
+- review (TEXT)
+- created_at (DATETIME)
+- user_id (foreign-key with `user`.`user_id`)
 
 ## Design minimum
 - Low fidelity designskiss
@@ -64,20 +99,20 @@ Det ska finnas följande tabeller:
   - Requirements & Installation: Vad behövs för att man själv ska kunna köra appen?
   - Screenshots: minst en screenshot (eller gif) som visar appen under använding
 - En användare ska kunna logga in och ut
-- inloggad användare ska kunna se sin egna samling av Bokrecension
-- BookReview ska kunna läggas till, editeras och raderas av ägare.
-- Alla **BookReview** ska finnas listade för en inloggad användare
+- Inloggad användare ska kunna se sin egna samling av bokrecensioner
+- Bokrecensioner ska kunna läggas till, editeras och raderas av ägare.
+- Alla bokrecensioner ska finnas listade för en inloggad användare
 - Alla formulärsfält som registeras till databasen ska vara validerade (att rätt och rimlig typ att data lagras)
 
 ## Code Extra
 - Publicerad via Linode eller motsvarade
-- Det ska vara möligt att registera en User med ett registreringsformulär
-- Det ska vara möligt att registera en bildurl för BookReview
-- Det ska vara möligt att sätta betyg (1-5 stjärnor) på en BookReview
-- Det ska vara möjligt att sätta en BookReview som draft
-   - ej inloggad användare ska inte kunna se draft BookReview
-- Det ska vara möjligt att sätta Likes på publika BookReview
-- Det ska vara möjligt att kommentera på publika BookReview
+- Det ska vara möligt att registera en användare med ett registreringsformulär
+- Det ska vara möligt att registera en bildurl för böcker
+- Det ska vara möligt att sätta betyg (1-5 stjärnor) på böcker
+- Det ska vara möjligt att sätta en bokrecension som draft
+   - ej inloggad användare ska inte kunna se draft av bokrecensioner
+- Det ska vara möjligt att sätta likes på publika bokrecensioner
+- Det ska vara möjligt att kommentera på publika bokrecensioner
 ***
 
 ### Inlämning och redovisning
